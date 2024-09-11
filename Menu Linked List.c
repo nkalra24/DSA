@@ -166,6 +166,40 @@ void del_3(){
     printf("\n\n");
 }
 
+
+void search(){
+    int item;
+    printf("Enter the element to be searched:\n");
+    scanf("%d",&item);
+    ptr=start;
+    count=1;
+    while(ptr!=NULL){
+        
+        if(item==ptr->data){
+            printf("Item found at node: %d\n",count);
+            break;
+        }
+        ptr=ptr->next;
+        count++;
+    }
+    printf("\n\n");
+}
+void del_4(){
+    struct node *p2;
+    int i;
+    search();
+    p2=start;
+    for(i=1;i<count-1;i++){
+        p2=p2->next;
+    }
+    p2->next=ptr->next;
+}
+
+
+
+
+
+
 int main(){
     int x,j;
     bool running;
@@ -177,12 +211,13 @@ int main(){
         printf("3.Delete a Node\n");
         printf("4.Display the Linked List\n");
         printf("5.Reverse the List\n");
-        printf("6.Exit\n");
+        printf("6.Search an element\n");
+        printf("7.Exit\n");
         printf("Please select a Task: ");
         scanf("%d",&x);
         switch(x){
         //Quiting from the program
-        case 6:
+        case 7:
             printf("Thank you!... Good Bye");
             running=false;
             break;
@@ -236,6 +271,7 @@ int main(){
             printf("\t1. Deletion at start\n");
             printf("\t2. Deletion at end\n");
             printf("\t3. Deletion at the given index\n");
+            printf("\t4. Deletion of an element\n ");
             scanf("%d",&j);
             switch(j){
                 case 1:
@@ -247,12 +283,23 @@ int main(){
                 case 3:
                     del_3();
                     break;
+                case 4:
+                    del_4();
+                    break;
                 default:
                     printf("Invalid choice");
                     break;
 
             }
             break;
+
+        case 6:
+            search();
+            break;
+        default:
+            printf("Invalid Choice");
+            break;
+
         }
     }
 }
