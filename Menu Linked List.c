@@ -7,12 +7,12 @@ struct node{
     int data;
     struct node *next;
 };
-struct node *start,*ptr,*last,*new;
+struct node *start,*ptr,*last,*new,*p1,*p2,*p3;
 void create(){
     //creating a node
     new=(struct node *)malloc(sizeof(struct node));
     if(new==NULL){
-        printf("Stack Overflow\n");
+        printf("List Overflow\n");
     }           
     else{
         printf("Enter the data:");
@@ -32,7 +32,6 @@ void traverse(){
     ptr=start;
     printf("\nThe Data is as follows:\n");
     while(ptr!=NULL){
-        count++;
         printf("%d  ",ptr->data);
         ptr=ptr->next;
     }
@@ -68,15 +67,14 @@ void insertion_2(){
 }
 void insertion_3(){
     //insertion at any given point
-    int pos, count=0,i;
-    struct node *p1;
+    int pos, count=1,i;
     
     printf("Enter the position you want to Insert:");
     scanf("%d",&pos);
-    last=start;
-    while(last!=NULL){
+    p2=start;
+    while(p2!=NULL){
         count+=1;
-        last=last->next;
+        p2=p2->next;
     }
     p1=start;
     if(pos==1){
@@ -101,7 +99,6 @@ void insertion_3(){
 
 void reverse(){
     //reversing of the list
-    struct node *p1,*p2,*p3;
     p1=start;
     p2=NULL;
     while(p1!=NULL){
@@ -118,51 +115,82 @@ void reverse(){
 void del_1(){
     //deletion of start
     int item;
-    item=start->data;
-    start=start->next;
-    printf("The deleted item is: %d",item);
+    if(start==NULL)
+        printf("List Underflow\n");
+    else{    
+        item=start->data;
+        p1=start;
+        start=start->next;
+        free(p1);
+        printf("The deleted item is: %d",item);
+    }
     printf("\n\n");
 }
 void del_2(){
     //deletion of end
-    int item;
-    ptr=start;
-    while(ptr->next->next!=NULL){
-        ptr=ptr->next;
+    int item,count=0;
+    if(start==NULL)
+        printf("List Underflow\n");
+    else{
+        p2=start;
+        while(p2!=NULL){
+            count+=1;
+            p2=p2->next;
+        }
+        if(count==1){
+            item=start->data;
+            p1=start;
+            start=NULL;
+            free(p1);
+            printf("The deleted item is: %d",item);
+        }
+        else{
+            ptr=start;
+            while(ptr->next->next!=NULL){
+                ptr=ptr->next;
+            }
+            item=ptr->next->data;
+            p1=ptr->next;
+            ptr->next=NULL;
+            free(p1);
+            printf("The deleted item is: %d",item);
+        }
     }
-    item=ptr->next->data;
-    ptr->next=NULL;
-    printf("The deleted item is: %d",item);
     printf("\n\n");
 }
 void del_3(){
     //deletion at any point
     int pos, count=0,i,item;
-    struct node *p1;
-    
-    printf("Enter the position you want to Delete:");
-    scanf("%d",&pos);
-    last=start;
-    while(last!=NULL){
-        count+=1;
-        last=last->next;
-    }
-    p1=start;
-    if(pos==1){
-        item=start->data;
-        start=start->next;
-        printf("The deleted item is: %d ",item);
-    }
-    else if(pos!=1 && pos<=count){
-        for(i=1;i<pos-1;i++)
-            p1=p1->next;
-        item=p1->next->data;
-        p1->next=p1->next->next;
-        printf("The deleted item is: %d",item);
+    if(start==NULL)
+        printf("List Underflow\n");
+    else{
+        printf("Enter the position you want to Delete:");
+        scanf("%d",&pos);
+        last=start;
+        while(last!=NULL){
+            count+=1;
+            last=last->next;
+        }
+        p1=start;
+        if(pos==1){
+            item=start->data;
+            p2=start;
+            start=start->next;
+            printf("The deleted item is: %d ",item);
+        }
+        else if(pos!=1 && pos<=count){
+            for(i=1;i<pos-1;i++)
+                p1=p1->next;
+            item=p1->next->data;
+            p2=p1->next;
+            p1->next=p1->next->next;
+            printf("The deleted item is: %d",item);
 
+        }
+        else
+            printf("Invalid Position");
+        free(p2);
     }
-    else
-        printf("Invalid Position");
     printf("\n\n");
 }
 
@@ -192,7 +220,9 @@ void del_4(){
     for(i=1;i<count-1;i++){
         p2=p2->next;
     }
+    p3=p2->next;
     p2->next=ptr->next;
+    free(p3);
 }
 
 
@@ -243,7 +273,7 @@ int main(){
             else{
                 new=(struct node *)malloc(sizeof(struct node));
                 if(new==NULL){
-                    printf("Stack Overflow\n");
+                    printf("List Overflow\n");
                 }           
                 else{
                     printf("Enter the data:");
@@ -260,7 +290,7 @@ int main(){
         //reversing of list
         case 5:
             if(start==NULL)
-                printf("Stack Underflow\n");
+                printf("List Underflow\n");
             else{
                 reverse();
             }
