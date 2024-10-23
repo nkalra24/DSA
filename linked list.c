@@ -9,7 +9,7 @@ struct node{
     int data;
     struct node *next;
 };
-struct node *start,*new,*last,*ptr;
+struct node *start=NULL,*new,*last,*ptr;
 
 void traverse(){
     //display of the list
@@ -27,7 +27,7 @@ int main(){
         //creating of the list
         new=(struct node *)malloc(sizeof(struct node));
         if(new==NULL){
-            printf("Stack overflow\n");
+            printf("List overflow\n");
             break;
         }
         else{
