@@ -29,6 +29,7 @@ int main(){
         else if(ch==')'){
             while(stack[top]!='(' && top!=-1)
                 postfix[j++]=stack[top--];
+            top--;
         }
         else if(priority(ch)>priority(stack[top]))
             stack[++top]=ch;
