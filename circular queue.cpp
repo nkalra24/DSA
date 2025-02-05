@@ -35,9 +35,10 @@ class queue{
             else{
                 ptr=front;
                 while((ptr+1)%9!=front && ptr!=rear){
-                    cout<<queue[ptr]<<"  "<<endl;
+                    cout<<queue[ptr]<<"  ";
                     ptr=(ptr+1)%9;
                 }
+                cout<<endl;
             }
         }
 };
